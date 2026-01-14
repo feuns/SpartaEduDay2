@@ -1,5 +1,8 @@
-## this setup is done in a Ubuntu OS, for Windows use GitBash
-# Depoyment Environment Specifications
+#### this setup is done in a Ubuntu OS, for Windows use GitBash
+
+# EC2 Instance setup & Basic App hosting
+
+## Depoyment Environment Specifications
 1. hardware requirements:
     - EC2 instance type: t3.micro (free tier)
     - vCPU: 2 cores
@@ -18,21 +21,21 @@
     - required infrastructure:
         - AWS EC2 instance
 
-# Installation & Configuration
+## Installation & Configuration
 1. create key pair:
     - on AWS, under EC2 create your own key pair
-    - !["AWS key setup screen"](key_setup.png)
+    - !["AWS key setup screen"](/images/key_setup.png)
 
 2. security group:
     - create your custom security group on EC2 with specifications defined in network config in section 1
-    - !["security group creation screen with correct values](sg_setup.png)
+    - !["security group creation screen with correct values](/images/sg_setup.png)
 
 3. instance setup:
     - in the EC2 section, create your instance using the specifications in section 1
-    - !["instance create screen"](instance_setup.png)
+    - !["instance create screen"](/images/instance_setup.png)
     - for security group and key pair, use your previously created items
 
-# SSH connection & setup
+## SSH connection & setup
 1. download and move your key pair to your ssh folder (~/.ssh)
 2. in terminal connect to instance:
     ```
@@ -57,7 +60,7 @@
         # intalling nginx:
         sudo apt install nginx
         ```
-# Application Deployment Prep
+## Application Deployment Prep
 1. create application directory using:
     ```
     mkdir -p /home/ubuntu/app
@@ -73,9 +76,9 @@
     cp -r file/app/* /home/ubuntu/app
     ``` 
 4.  from here using **ls** in terminal, you can check if all files have been correctly copied
-    - !["Checking files in app directory"](app_check.png)
+    - !["Checking files in app directory"](/images/app_check.png)
     
-# Dependencies & Process Management
+## Dependencies & Process Management
 1. install node.js dependencies:
     ```
     npm install
@@ -88,9 +91,9 @@
     ```
     pm2 start app.js --name sparta-test-app
     ```
-!["screenshot of successful deployment in termianl"](deployed.png)
+!["screenshot of successful deployment in termianl"](/images/deployed.png)
     
-# Nginx Config for Reverse Proxy
+## Nginx Config for Reverse Proxy
 1. remove default site:
         ```
         sudo rm /etc/nginx/sites-enabled/default
@@ -125,7 +128,7 @@
     sudo systemctl restart nginx
     ```
 
-# When Deployed
+## When Deployed
 - connect to the app via browser using http://public ip
 - the result should resemble the below image:
-!["sparta app"](sparta.png)
+!["sparta app"](/images/sparta.png)
